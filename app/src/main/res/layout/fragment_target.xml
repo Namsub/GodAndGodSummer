@@ -29,7 +29,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/button_target_settings"
                 android:layout_toStartOf="@+id/button_target_settings"
-                android:background="@drawable/calandar" />
+                />
+            <!-- android:background="@drawable/calandar"-->
         </RelativeLayout>
 
         <TextView
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:progress="50"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar_faith" />
 
         <TextView
@@ -75,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:progress="60"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar_population" />
 
         <TextView
@@ -103,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:progress="60"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar_donate" />
 
         <TextView
@@ -131,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:progress="60"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar_friend" />
 
         <TextView

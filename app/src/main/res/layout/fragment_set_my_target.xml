@@ -45,7 +45,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="5"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_faith" />
 
             <LinearLayout
@@ -92,7 +92,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_population" />
 
             <LinearLayout
@@ -138,7 +138,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_donate" />
 
             <LinearLayout
@@ -184,7 +184,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_friend" />
 
             <LinearLayout

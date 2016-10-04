@@ -4,6 +4,7 @@ package com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,24 +17,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.juntcompany.godandgodsummer.Main.MainActivity;
+import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.DefaultTab.LastWeekTargetFragment;
+import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.DefaultTab.SetMyTargetFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.NewsTab.NewsFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.ProfileTab.MyProfileFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.SettingTab.SettingFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.DefaultTab.TargetFragment;
+import com.juntcompany.godandgodsummer.Manager.DataCache;
 import com.juntcompany.godandgodsummer.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MyProfileMainFragment extends Fragment {
-
+    Fragment f;
 
     public MyProfileMainFragment() {
         // Required empty public constructor
     }
 
-
-    Fragment f;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,8 +84,8 @@ public class MyProfileMainFragment extends Fragment {
 //        탭레이아웃 세팅
         final TabLayout tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
 
+        f = new TargetFragment();
 
-          f = new TargetFragment();
 //        초기 화면용 프래그먼트  timeline 이 나와야함
         int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
         getActivity().getSupportFragmentManager()
@@ -132,7 +134,6 @@ public class MyProfileMainFragment extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
@@ -153,9 +154,6 @@ public class MyProfileMainFragment extends Fragment {
             }
 
         });
-
-
-
 
         return view;
     }

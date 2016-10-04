@@ -11,7 +11,7 @@
         android:layout_alignParentRight="true"
         android:background="@null"
         android:text="그룹 만들기"
-        android:drawableLeft="@drawable/ic_check"
         />
+        <!-- android:drawableLeft="@drawable/ic_check" -->
 
 </RelativeLayout>

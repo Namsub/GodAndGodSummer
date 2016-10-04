@@ -19,8 +19,6 @@ import com.juntcompany.godandgodsummer.R;
  * A simple {@link Fragment} subclass.
  */
 public class LastWeekTargetFragment extends Fragment {
-
-
     public LastWeekTargetFragment() {
         // Required empty public constructor
         setHasOptionsMenu(true); //꼭 해야 homebutton 이 동작함
