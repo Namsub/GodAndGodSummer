@@ -15,6 +15,7 @@ import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.Dialog.BeNotFriendDialogFragment;
 import com.juntcompany.godandgodsummer.Dialog.ChangePasswordFragment;
 import com.juntcompany.godandgodsummer.Login.LoginActivity;
+import com.juntcompany.godandgodsummer.Manager.TargetManager;
 import com.juntcompany.godandgodsummer.R;
 import com.juntcompany.godandgodsummer.Util.Rest.ApiClient;
 import com.juntcompany.godandgodsummer.Util.Rest.ApiInterface;
@@ -87,7 +88,9 @@ public class SettingFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 networkLogout();
+
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
             }
@@ -96,7 +99,6 @@ public class SettingFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
@@ -111,12 +113,10 @@ public class SettingFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.i("response", response.body().result.message);
                 Toast.makeText(getContext(), response.body().result.message, Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }

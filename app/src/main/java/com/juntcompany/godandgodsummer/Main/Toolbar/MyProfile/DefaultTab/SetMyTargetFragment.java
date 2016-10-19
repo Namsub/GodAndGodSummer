@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.juntcompany.godandgodsummer.Main.MainActivity;
+import com.juntcompany.godandgodsummer.Manager.PropertyManager;
 import com.juntcompany.godandgodsummer.Manager.TargetManager;
 import com.juntcompany.godandgodsummer.R;
 
@@ -61,7 +62,6 @@ public class SetMyTargetFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_set_my_target, container, false);
 
         setObjects(view);
-
 ///////////////////        툴바 세팅
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -77,18 +77,29 @@ public class SetMyTargetFragment extends Fragment {
 
         View viewToolbar = getActivity().getLayoutInflater().inflate(R.layout.toolbar_profile_check, null);
         Button btn = (Button)viewToolbar.findViewById(R.id.button_check);
+        final PropertyManager propertyManager = PropertyManager.getInstance();
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sqlite 에 각 progressbar 값들 저장
-                TargetManager targetmanager = TargetManager.getInstance();
-                targetmanager.insert(faithgraph_progressbar.getProgress(), populargraph_progressbar.getProgress(), donategraph_progressbar.getProgress(), friendlygraph_progressbar.getProgress());
+
+                propertyManager.setCurrentTargetFaith(faithgraph_progressbar.getProgress());
+                propertyManager.setCurrentTargetPopular(populargraph_progressbar.getProgress());
+                propertyManager.setCurrentTargetDonate(donategraph_progressbar.getProgress());
+                propertyManager.setCurrentTargetFriendly(friendlygraph_progressbar.getProgress());
+
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
         actionBar.setCustomView(viewToolbar, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
 
 //////////////////////////////////        툴바 세팅
+
+        faithgraph_progressbar.setProgress(propertyManager.getCurrentTargetFaith());
+        populargraph_progressbar.setProgress(propertyManager.getCurrentTargetPopular());
+        donategraph_progressbar.setProgress(propertyManager.getCurrentTargetDonate());
+        friendlygraph_progressbar.setProgress(propertyManager.getCurrentTargetFriendly());
 
         // 신앙도 위젯 부분
         edit_faith.addTextChangedListener(new TextWatcher() {
@@ -102,12 +113,8 @@ public class SetMyTargetFragment extends Fragment {
                         faithgraph_progressbar.setProgress(Integer.parseInt(charSequence.toString()));
                     } catch(Exception e){
                         Toast.makeText(getContext(), "숫자를 입력해주세요", Toast.LENGTH_SHORT).show();
-                    } finally {
                     }
                 }
-                    //donategraph_progressbar.setVisibility(ProgressBar.VISIBLE);
-                else
-                    faithgraph_progressbar.setProgress(0);
             }
             @Override
             public void afterTextChanged(Editable editable) {
@@ -126,11 +133,8 @@ public class SetMyTargetFragment extends Fragment {
                         populargraph_progressbar.setProgress(Integer.parseInt(charSequence.toString()));
                     } catch(Exception e){
                         Toast.makeText(getContext(), "숫자를 입력해주세요", Toast.LENGTH_SHORT).show();
-                    } finally {
                     }
                 }
-                else
-                    populargraph_progressbar.setProgress(0);
             }
             @Override
             public void afterTextChanged(Editable editable) {
@@ -149,12 +153,8 @@ public class SetMyTargetFragment extends Fragment {
                         donategraph_progressbar.setProgress(Integer.parseInt(charSequence.toString()));
                     } catch(Exception e){
                         Toast.makeText(getContext(), "숫자를 입력해주세요", Toast.LENGTH_SHORT).show();
-                    } finally {
                     }
                 }
-                    //donategraph_progressbar.setVisibility(ProgressBar.VISIBLE);
-                else
-                    donategraph_progressbar.setProgress(0);
             }
             @Override
             public void afterTextChanged(Editable editable) {
@@ -173,11 +173,8 @@ public class SetMyTargetFragment extends Fragment {
                         friendlygraph_progressbar.setProgress(Integer.parseInt(charSequence.toString()));
                     } catch(Exception e){
                         Toast.makeText(getContext(), "숫자를 입력해주세요", Toast.LENGTH_SHORT).show();
-                    } finally {
                     }
                 }
-                else
-                    friendlygraph_progressbar.setProgress(0);
             }
             @Override
             public void afterTextChanged(Editable editable) {

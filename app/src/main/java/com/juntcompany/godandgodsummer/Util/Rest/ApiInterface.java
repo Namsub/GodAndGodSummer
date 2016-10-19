@@ -33,7 +33,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded //O
     @POST("/auth/signup") //회원가입 api // email, name, password,religion, phone,gender,birth
-    Call<User> createUser(@Field("email") String email, @Field("name") String name, @Field("password") String password, @Field("religion") String religion, @Field("phone") String phone, @Field("birth") String birth);
+    Call<User> createUser(@Field("email") String email, @Field("name") String name, @Field("password") String password, @Field("religion") String religion, @Field("phone") String phone, @Field("gender") String gender, @Field("birth") String birth);
 
     @FormUrlEncoded //O
     @POST("/auth/login") //회원가입 api

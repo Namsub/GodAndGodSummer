@@ -18,7 +18,10 @@ import com.juntcompany.godandgodsummer.Main.Toolbar.FriendManage.FriendManageFra
 import com.juntcompany.godandgodsummer.Main.Toolbar.Marked.MarkedFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.MyProfile.MyProfileMainFragment;
 import com.juntcompany.godandgodsummer.Main.Video.VideoFragment;
+import com.juntcompany.godandgodsummer.Manager.PropertyManager;
 import com.juntcompany.godandgodsummer.R;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +48,51 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+// 메인화면 띄워질 때 제일 먼저 마지막 접속시간 비교해서 지난주 타겟값 업데이트하기
+        //마지막 접속시간 불러오기
+        PropertyManager propertymanager = PropertyManager.getInstance();
+        String time = propertymanager.getLastAccessTime();
+
+        int previous_year = 0;
+        int previous_week = 0;
+        if(!time.isEmpty()) {
+            String[] split_time = time.split("/");
+
+            previous_year = Integer.parseInt(split_time[0]);
+            previous_week = Integer.parseInt(split_time[1]);
+        }
+
+        //현재시간 불러오기
+        Calendar current_cal = Calendar.getInstance();
+        int current_year = current_cal.get(Calendar.YEAR);
+        int current_week = current_cal.get(Calendar.WEEK_OF_YEAR);
+        propertymanager.setLastAccessTime(Integer.toString(current_year) + "/" + Integer.toString(current_week));
+
+        boolean update = false;
+
+        Log.i("Calendar", "" + current_year + previous_year + current_week + previous_week);
+        if(current_year == previous_year){
+            if(current_week == previous_week+1)
+                update = true;
+        }
+        else if(current_year > previous_year){ //여기서 이슈는 똑같은 주에 년도가 바뀌는 경우에 대해서 처리해야함(아래코드는 해당 경우의수 반영 못함)
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, current_year-1);
+            cal.set(Calendar.MONTH, 12);
+            cal.set(Calendar.DATE, 31);
+            current_week += cal.get(Calendar.WEEK_OF_YEAR);
+            if(current_week == previous_week+1)
+                update = true;
+        }
+
+        //update가 true 일때만 지난 주 target 값 업데이트 및 이번주 target 값 초기화
+        if(update == true){
+            propertymanager.setPreviousTargetFaith(propertymanager.getCurrentTargetFaith());
+            propertymanager.setPreviousTargetPopular(propertymanager.getCurrentTargetPopular());
+            propertymanager.setPreviousTargetDonate(propertymanager.getCurrentTargetDonate());
+            propertymanager.setPreviousTargetFriendly(propertymanager.getCurrentTargetFriendly());
+        }
 
 //
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

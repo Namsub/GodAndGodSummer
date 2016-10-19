@@ -16,8 +16,9 @@ import com.juntcompany.godandgodsummer.Util.GodAndGod;
  * Created by NSLee on 2016-09-28.
  */
 
-public class TargetManager extends SQLiteOpenHelper {
-
+//public class TargetManager extends SQLiteOpenHelper {
+public class TargetManager {
+/*
     private static TargetManager instance;
     public static TargetManager getInstance() {
         if (instance == null) {
@@ -26,15 +27,16 @@ public class TargetManager extends SQLiteOpenHelper {
         return instance;
     }
 
+*/
     private static final String DB_NAME = "target.db";
     private static final int DB_VERSION = 1;
-    private int[] result;
+//    private int[] result;
 
     public TargetManager() {
-        super(GodAndGod.getContext(), DB_NAME, null, DB_VERSION);
-        System.out.println("Constructor");
-        result = new int[4];
+//        super(GodAndGod.getContext(), DB_NAME, null, DB_VERSION);
+//        result = new int[4];
     }
+    /*
     ///////////////////////////
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -112,4 +114,5 @@ public class TargetManager extends SQLiteOpenHelper {
         db.execSQL("drop table " + DBContants.Target.TABLE_NAME);
         db.close();
     }
+    */
 }
