@@ -22,6 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     private void loginNetwork(final String email, final String password){  //로그인 할때 사용, 네트워킹이 성공하면 메인으로 이동
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<User> call = apiInterface.userLogin(email, password);
@@ -72,14 +74,26 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (response.body().result.status.equals("success")) {
                     Toast.makeText(getApplicationContext(), response.body().result.message, Toast.LENGTH_SHORT).show();
                     //아이디 비번 로컬에 저장
-
                     loginInfoNetwork(email); //사용자 정보를 모두 저장하기 위해 씀.
+
+                    //Log.i("test1", response.body().toString() + " : " + response.body().current_target.faith);
+
+                    //SQLite에 current_target값 저장(로컬 디비 날라갔을 때를 대비해서..)
+                    //PropertyManager propertymanager = PropertyManager.getInstance();
+                    //propertymanager.setCurrentTargetFaith(response.body().current_target.faith);
+                    //propertymanager.setCurrentTargetFaith(response.body().current_target.popular);
+                    //propertymanager.setCurrentTargetFaith(response.body().current_target.donate);
+                    //propertymanager.setCurrentTargetFaith(response.body().current_target.friendly);
+
 
                     //로그인 성공 화면 이동
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK); // 메인을 들어가면 메인 전에 실행했던 TASK 를 모두 삭제
                     startActivity(intent);
                 }
+
+
+
 //
             }
 

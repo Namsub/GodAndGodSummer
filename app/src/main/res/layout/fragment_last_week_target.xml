@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimaryDark"/>
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,11 +41,10 @@
 
             <ProgressBar
                 android:id="@+id/faithgraph_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:progress="50"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_faith" />
 
             <LinearLayout
@@ -57,7 +56,7 @@
                     android:id="@+id/text_faith_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -72,7 +71,7 @@
                     android:id="@+id/text_faith_figure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -91,11 +90,10 @@
 
             <ProgressBar
                 android:id="@+id/populargraph_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_population" />
 
             <LinearLayout
@@ -107,7 +105,7 @@
                     android:id="@+id/text_popular_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -122,7 +120,7 @@
                     android:id="@+id/text_popular_figure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -140,11 +138,10 @@
 
             <ProgressBar
                 android:id="@+id/donategraph_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_donate" />
 
             <LinearLayout
@@ -156,7 +153,7 @@
                     android:id="@+id/text_donate_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -171,7 +168,7 @@
                     android:id="@+id/text_donate_figure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -189,11 +186,10 @@
 
             <ProgressBar
                 android:id="@+id/friendlygraph_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:progress="60"
+                android:progress="0"
                 android:progressDrawable="@drawable/progressbar_friend" />
 
             <LinearLayout
@@ -205,7 +201,7 @@
                     android:id="@+id/text_friendly_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -220,7 +216,7 @@
                     android:id="@+id/text_friendly_figure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7361"
+                    android:text="0"
                     android:textSize="18dp"
                     android:textStyle="bold" />
             </LinearLayout>

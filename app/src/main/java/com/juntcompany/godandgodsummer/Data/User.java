@@ -1,6 +1,7 @@
 package com.juntcompany.godandgodsummer.Data;
 
 import com.google.gson.annotations.SerializedName;
+import com.juntcompany.godandgodsummer.DataStructure.Target;
 import com.juntcompany.godandgodsummer.DataStructure.UserResult;
 
 import java.io.Serializable;
@@ -36,7 +37,8 @@ public class User implements Serializable{
     public String religionArea;
     public String city;
 
-
+    public Target previous_target;
+    public Target current_target;
 
     public UserResult result;
 

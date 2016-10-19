@@ -92,4 +92,85 @@ public class PropertyManager {
     public String getUserIntroduction(){
         return mPrefs.getString(FIELD_USER_INTRODUCTION, "");
     }
+
+    private static final String FIELD_CURRENT_TARGET_FAITH = "current_target_faith";
+    public void setCurrentTargetFaith(int faith){
+        mEditor.putInt(FIELD_CURRENT_TARGET_FAITH, faith);
+        mEditor.commit();
+    }
+    public int getCurrentTargetFaith(){
+        return mPrefs.getInt(FIELD_CURRENT_TARGET_FAITH, 0);
+    }
+
+    private static final String FIELD_CURRENT_TARGET_POPULAR = "current_target_popular";
+    public void setCurrentTargetPopular(int popular){
+        mEditor.putInt(FIELD_CURRENT_TARGET_POPULAR, popular);
+        mEditor.commit();
+    }
+    public int getCurrentTargetPopular(){
+        return mPrefs.getInt(FIELD_CURRENT_TARGET_POPULAR, 0);
+    }
+
+    private static final String FIELD_CURRENT_TARGET_DONATE = "current_target_donate";
+    public void setCurrentTargetDonate(int donate){
+        mEditor.putInt(FIELD_CURRENT_TARGET_DONATE, donate);
+        mEditor.commit();
+    }
+    public int getCurrentTargetDonate(){
+        return mPrefs.getInt(FIELD_CURRENT_TARGET_DONATE, 0);
+    }
+
+    private static final String FIELD_CURRENT_TARGET_FRIENDLY = "current_target_friendly";
+    public void setCurrentTargetFriendly(int friendly){
+        mEditor.putInt(FIELD_CURRENT_TARGET_FRIENDLY, friendly);
+        mEditor.commit();
+    }
+    public int getCurrentTargetFriendly(){
+        return mPrefs.getInt(FIELD_CURRENT_TARGET_FRIENDLY, 0);
+    }
+
+    private static final String FIELD_PREVIOUS_TARGET_FAITH = "previous_target_faith";
+    public void setPreviousTargetFaith(int faith){
+        mEditor.putInt(FIELD_PREVIOUS_TARGET_FAITH, faith);
+        mEditor.commit();
+    }
+    public int getPreviousTargetFaith(){
+        return mPrefs.getInt(FIELD_PREVIOUS_TARGET_FAITH, 0);
+    }
+
+    private static final String FIELD_PREVIOUS_TARGET_POPULAR = "previous_target_popular";
+    public void setPreviousTargetPopular(int popular){
+        mEditor.putInt(FIELD_PREVIOUS_TARGET_POPULAR, popular);
+        mEditor.commit();
+    }
+    public int getPreviousTargetPopular(){
+        return mPrefs.getInt(FIELD_PREVIOUS_TARGET_POPULAR, 0);
+    }
+
+    private static final String FIELD_PREVIOUS_TARGET_DONATE = "previous_target_donate";
+    public void setPreviousTargetDonate(int donate){
+        mEditor.putInt(FIELD_PREVIOUS_TARGET_DONATE, donate);
+        mEditor.commit();
+    }
+    public int getPreviousTargetDonate(){
+        return mPrefs.getInt(FIELD_PREVIOUS_TARGET_DONATE, 0);
+    }
+
+    private static final String FIELD_PREVIOUS_TARGET_FRIENDLY = "previous_target_friendly";
+    public void setPreviousTargetFriendly(int friendly){
+        mEditor.putInt(FIELD_PREVIOUS_TARGET_FRIENDLY, friendly);
+        mEditor.commit();
+    }
+    public int getPreviousTargetFriendly(){
+        return mPrefs.getInt(FIELD_PREVIOUS_TARGET_FRIENDLY, 0);
+    }
+
+    private static final String FIELD_LAST_ACCESS_TIME = "last_access_time";
+    public void setLastAccessTime(String access_time){
+        mEditor.putString(FIELD_LAST_ACCESS_TIME, access_time);
+        mEditor.commit();
+    }
+    public String getLastAccessTime(){
+        return mPrefs.getString(FIELD_LAST_ACCESS_TIME, "");
+    }
 }

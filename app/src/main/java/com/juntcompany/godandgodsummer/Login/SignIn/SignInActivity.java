@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.juntcompany.godandgodsummer.Data.User;
+import com.juntcompany.godandgodsummer.Manager.PropertyManager;
 import com.juntcompany.godandgodsummer.R;
 import com.juntcompany.godandgodsummer.Util.Rest.ApiClient;
 import com.juntcompany.godandgodsummer.Util.Rest.ApiInterface;
@@ -56,13 +57,18 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void callSignUpLast(User user){ //마지막 signin11comfirm 프래그먼트까지 다 돌고 마칠때 호출하는 메소드
-        Log.i("user", this.user.phoneNumber + this.user.email + " ::::" + user.email + user.password);
+        Log.i("user", this.user.phoneNumber + this.user.email + " ::::" + user.email + user.password + user.gender);
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<User> call =apiInterface.createUser(user.email, user.name, user.password, user.religion, user.phoneNumber, user.birthDay);
+        Call<User> call =apiInterface.createUser(user.email, user.name, user.password, user.religion, user.phoneNumber, user.gender, user.birthDay);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.i("response", response.body().toString());
+                PropertyManager propertyManager = PropertyManager.getInstance();
+                propertyManager.setCurrentTargetFaith(50);
+                propertyManager.setCurrentTargetPopular(50);
+                propertyManager.setCurrentTargetDonate(50);
+                propertyManager.setCurrentTargetFriendly(50);
             }
 
             @Override

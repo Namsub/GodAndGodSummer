@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.juntcompany.godandgodsummer.Data.MyProfile;
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.Main.MainActivity;
 import com.juntcompany.godandgodsummer.Manager.PropertyManager;
+import com.juntcompany.godandgodsummer.Manager.TargetManager;
 import com.juntcompany.godandgodsummer.R;
 
 /**
@@ -39,6 +41,7 @@ public class MyProfileHeaderViewHolder extends RecyclerView.ViewHolder{
     TextView textUserComment;
 
     TextView textReligion, textFriendNum, textReligionArea, textCity;
+    TextView textFaith, textPopular, textDonate, textFriendly;
     Context mContext;
 
     public MyProfileHeaderViewHolder(View itemView) {
@@ -66,6 +69,11 @@ public class MyProfileHeaderViewHolder extends RecyclerView.ViewHolder{
         textFriendNum = (TextView)itemView.findViewById(R.id.myProfileFriendNum);
         textReligionArea = (TextView)itemView.findViewById(R.id.myProfileReligionHome);
         textCity = (TextView)itemView.findViewById(R.id.myProfileCity);
+
+        textFaith = (TextView)itemView.findViewById(R.id.myProfileFaith);
+        textPopular = (TextView)itemView.findViewById(R.id.myProfilePopular);
+        textDonate = (TextView)itemView.findViewById(R.id.myProfileDonate);
+        textFriendly = (TextView)itemView.findViewById(R.id.myProfileFriendly);
         Button btn = (Button)itemView.findViewById(R.id.button_profile_change);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,5 +102,16 @@ public class MyProfileHeaderViewHolder extends RecyclerView.ViewHolder{
         textReligionArea.setText(user.religionArea);
         textUserComment.setText(user.introduction);
 
+        //sqlite 에 저장된 progressbar 값 가져오기
+        final PropertyManager propertymanager = PropertyManager.getInstance();
+        int current_target_faith = propertymanager.getCurrentTargetFaith();
+        int current_target_popular = propertymanager.getCurrentTargetPopular();
+        int current_target_donate = propertymanager.getCurrentTargetDonate();
+        int current_target_friendly = propertymanager.getCurrentTargetFriendly();
+
+        textFaith.setText(Integer.toString(current_target_faith));
+        textPopular.setText(Integer.toString(current_target_popular));
+        textDonate.setText(Integer.toString(current_target_donate));
+        textFriendly.setText(Integer.toString(current_target_friendly));
     }
 }

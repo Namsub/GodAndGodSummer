@@ -88,11 +88,12 @@
                     android:text="신앙도"
                     />
                 <TextView
+                    android:id="@+id/myProfileFaith"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:layout_marginLeft="20dp"
-                    android:text="100%"
+                    android:text="0%"
 
                     />
             </TableRow>
@@ -145,15 +146,16 @@
                     android:layout_column="3"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="신앙도"
+                    android:text="인기도"
                     />
                 <TextView
+                    android:id="@+id/myProfilePopular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="100%"
+                    android:text="0%"
 
                     />
 
@@ -184,22 +186,20 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
                     android:layout_marginLeft="20dp"
-                    android:text="신앙도"
+                    android:text="봉헌도"
                     />
                 <TextView
+                    android:id="@+id/myProfileDonate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:layout_marginLeft="20dp"
-                    android:text="100%"
+                    android:text="0%"
 
                     />
             </TableRow>
 
             <TableRow>
-
-
-
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -221,15 +221,15 @@
                     android:layout_height="wrap_content"
                     android:layout_column="3"
                     android:layout_marginLeft="20dp"
-                    android:text="신앙도"
+                    android:text="친밀도"
                     />
                 <TextView
+                    android:id="@+id/myProfileFriendly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:layout_marginLeft="20dp"
-                    android:text="100%"
-
+                    android:text="0%"
                     />
             </TableRow>
         </TableLayout>
