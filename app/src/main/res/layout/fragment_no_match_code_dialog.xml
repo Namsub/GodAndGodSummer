@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_centerInParent="true"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/noMatchCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="코드가 일치하지 않습니다. 다시 입력해주세요."
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button_retry"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noMatchCode"
+        android:layout_toLeftOf="@+id/button_revestCode"
+        android:background="@null"
+        android:padding="10dp"
+        android:text="다시 시도"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <Button
+        android:id="@+id/button_revestCode"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/noMatchCode"
+        android:background="@null"
+        android:padding="10dp"
+        android:text="코드 다시 받기" />
+
+
+</RelativeLayout>

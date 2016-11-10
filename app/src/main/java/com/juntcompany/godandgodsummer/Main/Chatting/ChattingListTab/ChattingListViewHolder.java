@@ -15,6 +15,7 @@ public class ChattingListViewHolder extends RecyclerView.ViewHolder {
 
     public interface OnItemSelectClickListener{
         public void onItemClick(View view, int position);
+        public void onItemLongClick(View view, int position);
     }
 
     OnItemSelectClickListener mItemClickListener;
@@ -27,20 +28,36 @@ public class ChattingListViewHolder extends RecyclerView.ViewHolder {
     TextView chatLastSpeak;
     TextView chatLastTime;
 
-    public ChattingListViewHolder(View itemView) {
+    public ChattingListViewHolder(View itemView, int type) {
         super(itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mItemClickListener!=null){
+                if (mItemClickListener != null) {
                     mItemClickListener.onItemClick(view, getAdapterPosition());
                 }
             }
         });
-        chatFriendPicture = (ImageView)itemView.findViewById(R.id.image_video);
-        chatFriendName = (TextView)itemView.findViewById(R.id.text_video_name);
-        chatLastSpeak = (TextView)itemView.findViewById(R.id.text_last_speak);
-        chatLastTime = (TextView)itemView.findViewById(R.id.text_last_time);
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view){
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemLongClick(view, getAdapterPosition());
+                }
+                return true;
+            }
+        });
+
+        switch(type) {
+            case 0:
+            chatFriendPicture = (ImageView) itemView.findViewById(R.id.image_video);
+            chatFriendName = (TextView) itemView.findViewById(R.id.text_video_name);
+            chatLastSpeak = (TextView) itemView.findViewById(R.id.text_last_speak);
+            chatLastTime = (TextView) itemView.findViewById(R.id.text_last_time);
+                break;
+            case 1:
+                break;
+        }
     }
 
     public void setData(Chat chat){

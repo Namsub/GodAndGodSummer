@@ -29,11 +29,22 @@ public class ChattingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
+    public void remove(int position){
+        Chat item = items.get(position);
+        item.number_of_persons -= 1;
+        if(item.number_of_persons == 0){
+            //디비 제거 작업 수행하기
+            Log.i("firebase_remove", ": firebase_remove");
+        }
+        items.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
        View view = inflater.inflate(R.layout.view_chatting_list, parent, false);
-        ChattingListViewHolder holder = new ChattingListViewHolder(view);
+        ChattingListViewHolder holder = new ChattingListViewHolder(view, 0);
         holder.setOnItemClickListener(this);
         return holder;
     }
@@ -61,6 +72,7 @@ public class ChattingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public interface OnAdapterItemClickListener{
         public void onAdapterItemViewClick(View view, int position);
+        public void onAdapterItemViewLongClick(View view, int position);
     }
 
     OnAdapterItemClickListener mAdapterClickListener;
@@ -73,6 +85,12 @@ public class ChattingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onItemClick(View view, int position) {
         if(mAdapterClickListener!=null){
             mAdapterClickListener.onAdapterItemViewClick(view, position);
+        }
+    }
+    @Override
+    public void onItemLongClick(View view, int position){
+        if(mAdapterClickListener != null){
+            mAdapterClickListener.onAdapterItemViewLongClick(view, position);
         }
     }
 }

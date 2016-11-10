@@ -6,6 +6,10 @@ import android.preference.PreferenceManager;
 
 import com.juntcompany.godandgodsummer.Util.GodAndGod;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by EOM on 2016-07-15.
  */
@@ -121,7 +125,8 @@ public class PropertyManager {
     }
 
     private static final String FIELD_CURRENT_TARGET_FRIENDLY = "current_target_friendly";
-    public void setCurrentTargetFriendly(int friendly){
+    public void setCurrentTargetFriendly(
+            int friendly){
         mEditor.putInt(FIELD_CURRENT_TARGET_FRIENDLY, friendly);
         mEditor.commit();
     }
@@ -172,5 +177,23 @@ public class PropertyManager {
     }
     public String getLastAccessTime(){
         return mPrefs.getString(FIELD_LAST_ACCESS_TIME, "");
+    }
+
+
+    private static final String FIELD_ROOM_LIST = "room_list";
+    public void setRoomList(String room_list){
+        mEditor.putString(FIELD_ROOM_LIST, room_list);
+        mEditor.commit();
+    }
+    public String getRoomList(){
+        return mPrefs.getString(FIELD_ROOM_LIST, "");
+    }
+
+    public void setRoomNOP(String key, int nop){
+        mEditor.putInt(key, nop);
+        mEditor.commit();
+    }
+    public int getRoomNOP(String key){
+        return mPrefs.getInt(key, 0);
     }
 }

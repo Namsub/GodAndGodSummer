@@ -80,5 +80,4 @@ public class FriendListFragment extends Fragment {
             mAdapter.add(friend);
         }
     }
-
 }

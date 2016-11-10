@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/inputEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:text="이메일 주소를 입력해주세요."
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/whenPWResetORLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="로그인할 때 또는 비밀번호를 재설정 할 때"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/useEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/whenPWResetORLogin"
+        android:layout_centerHorizontal="true"
+        android:text="이메일 주소를 사용합니다."
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/userEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/useEmail"
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:hint="이메일 주소를 입력해주세요." />
+
+</RelativeLayout>

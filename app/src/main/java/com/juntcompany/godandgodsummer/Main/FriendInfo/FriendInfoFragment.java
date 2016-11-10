@@ -19,6 +19,7 @@ import com.juntcompany.godandgodsummer.Data.Timeline;
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.DataStructure.UserSearchResponse;
 import com.juntcompany.godandgodsummer.DataStructure.UserTimelineResponse;
+import com.juntcompany.godandgodsummer.Dialog.BeFriendDialogFragment;
 import com.juntcompany.godandgodsummer.Dialog.BeNotFriendDialogFragment;
 import com.juntcompany.godandgodsummer.Dialog.MessageNotFragment;
 import com.juntcompany.godandgodsummer.Main.MainActivity;
@@ -75,7 +76,7 @@ public class FriendInfoFragment extends Fragment {  // 해당 유저 쓴 글과 
             @Override
             public void onAdapterItemAddClick(View view, int position) {
 //                Toast.makeText(getContext(),"친구 추가", Toast.LENGTH_SHORT).show();
-                BeNotFriendDialogFragment df = new BeNotFriendDialogFragment();
+                BeFriendDialogFragment df = new BeFriendDialogFragment();
                 df.show(getFragmentManager(), DIALOG);
             }
 

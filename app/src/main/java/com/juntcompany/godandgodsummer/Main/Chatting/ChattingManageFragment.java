@@ -87,6 +87,7 @@ public class ChattingManageFragment extends Fragment {
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.chat));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.chat_click));
+
 //        탭과 pager 세팅
 
 

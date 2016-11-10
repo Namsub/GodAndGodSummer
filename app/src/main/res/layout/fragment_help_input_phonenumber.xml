@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.juntcompany.godandgodsummer.Login.Help.HelpFindPhoneActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/inputPhone"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/inputPhoneNumber_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputPhone"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="계정을 검색하려면 회원가입 휴대폰 번호를 입력하세요." />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputPhoneNumber_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="다음"
+        android:textColor="@color/colorWhite"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/receiveCode1"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/next"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:text="코드 다시 받기"
+        android:textColor="@color/colorBlack" />
+
+    <Button
+        android:id="@+id/receiveCodeToEmail"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/receiveCode1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:text="이메일로 코드 받기"
+        android:textColor="@color/colorBlack" />
+
+</RelativeLayout>

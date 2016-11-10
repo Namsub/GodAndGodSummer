@@ -7,6 +7,7 @@ import android.provider.BaseColumns;
  */
 public class DBContants {
 
+
     public interface ChattingRoom extends BaseColumns {
         public static final String TABLE_NAME = "chattingRoom";
         public static final String COLUMN_NAME = "name";
@@ -24,11 +25,10 @@ public class DBContants {
     }
 
     public interface Target extends BaseColumns {
-        public static final String TABLE_NAME = "target";
-        public static final String COLUMN_FAITH = "faith";
-        public static final String COLUMN_POPULAR = "popular";
-        public static final String COLUMN_DONATE = "donate";
-        public static final String COLUMN_FRIENDLY = "friendly";
+        public static final String TABLE_NAME = "chat_room_info";
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_LAST_SPEAK = "last_speak";
+        public static final String COLUMN_LAST_TIME = "last_time";
     }
 
     ///db 컬럼 정의 하는 곳

@@ -39,6 +39,7 @@ public class SplashActivity extends AppCompatActivity {
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
+                            Log.i("splash1", "test");
                             if(response.isSuccessful()){
                                 if (response.body().result.status.equals("success")) {
                                     //로그인 성공 화면 이동

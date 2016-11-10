@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.DataStructure.UserInfoResponse;
+import com.juntcompany.godandgodsummer.Login.Help.HelpActivity;
 import com.juntcompany.godandgodsummer.Login.SignIn.SignInActivity;
 import com.juntcompany.godandgodsummer.Main.MainActivity;
 import com.juntcompany.godandgodsummer.Manager.PropertyManager;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = edit_id.getText().toString();
                 String password = edit_password.getText().toString();
                 Log.i("login", " dddddd " + email + password);
+                PropertyManager.getInstance().setUserEmail(email);
                 PropertyManager.getInstance().setUserPassword(password); // 네트워크에서 받아온 값은 암호화된 패스워드이므로 입력창에서 패스워드 저장
                 loginNetwork(email, password); //네트워크 메소드
             }
@@ -53,6 +55,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
 
+                startActivity(intent);
+            }
+        });
+
+        btn = (Button) findViewById(R.id.button_help);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,10 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK); // 메인을 들어가면 메인 전에 실행했던 TASK 를 모두 삭제
                     startActivity(intent);
                 }
-
-
-
-//
             }
 
             @Override
