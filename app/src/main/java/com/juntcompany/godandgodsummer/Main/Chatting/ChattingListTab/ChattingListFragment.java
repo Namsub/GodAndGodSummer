@@ -58,27 +58,19 @@ public class ChattingListFragment extends Fragment {
             @Override
             public void onAdapterItemViewClick(View view, int position) {
                 Chat chat = mAdapter.getItem(position);
-                Intent intent = new Intent(getContext(), ChattingActivity.class);
-                intent.putExtra("room_number", chat.room_number);
-                intent.putExtra("email", email);
-                startActivity(intent);
+                startActivity(chat.intent);
             }
             // 내가 추가한 부분 ///
             public void onAdapterItemViewLongClick(View view, final int position){
                 Chat temp_item = mAdapter.getItem(position);
                 temp_item.intent = null;
                 databaseReference.child(email+temp_item.room_number).removeValue();
-                mAdapter.getItem(position).number_of_persons = PropertyManager.getInstance().getRoomNOP(mAdapter.getItem(position).room_number);
-                Log.i("chatlist", "nop : " + mAdapter.getItem(position).number_of_persons);
-                Log.i("chatlist", "room_number : " + temp_item.room_number);
-                Log.i("chatlist", "email : " + email);
                 databaseReference.child(temp_item.room_number).child(email).removeValue();
+                mAdapter.getItem(position).number_of_persons = PropertyManager.getInstance().getRoomNOP(mAdapter.getItem(position).room_number);
                 if(mAdapter.getItem(position).number_of_persons == 1) {
-                    //databaseReference.child(temp_item.room_number).setValue(0);
                     databaseReference.child(temp_item.room_number).removeValue();
+                    databaseReference.child(temp_item.room_number+"number").removeValue();
                 }
-                //else
-                //    databaseReference.child(mAdapter.getItem(position).room_number).setValue(--mAdapter.getItem(position).number_of_persons);
 
                 String[] temp_list = room_list.split("[|]");
                 room_list = "";
@@ -118,16 +110,15 @@ public class ChattingListFragment extends Fragment {
 
                 Log.i("chat", "room : " + room_list  );
                 PropertyManager.getInstance().setRoomList(room_list);
-                //databaseReference.child(chat.room_number).setValue(0);
-                //databaseReference.child(chat.room_number).push().setValue(email);
+
                 databaseReference.child(chat.room_number).child(email).setValue(email);
-                //Toast.makeText(getContext(), chat.room_number , Toast.LENGTH_SHORT).show();
+
                 chat.intent = new Intent(getContext(), ChattingActivity.class);
                 chat.intent.putExtra("room_number", chat.room_number);
-                Log.i("chatlist", "email : " + email  );
                 chat.intent.putExtra("email", email);
                 mAdapter.add(chat);
                 count++;
+
                 startActivity(chat.intent);
             }
         });

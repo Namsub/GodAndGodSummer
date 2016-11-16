@@ -1,7 +1,5 @@
 package com.juntcompany.godandgodsummer.Login.Help;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,36 +19,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.juntcompany.godandgodsummer.Dialog.NoMatchPhoneDialogFragment;
-import com.juntcompany.godandgodsummer.Login.SignIn.SignIn4PhoneFragment;
-import com.juntcompany.godandgodsummer.Login.SignIn.SignInActivity;
 import com.juntcompany.godandgodsummer.R;
 
 /**
- * Created by 이서현 on 2016-11-09.
+ * Created by 이서현 on 2016-11-10.
  */
 
 public class Help2PhoneFragment extends Fragment {
+    private final String TITLE = "휴대폰 번호 입력";
+    EditText inputPhone;
+    Button btn_next;
 
-    private EditText inputPhoneNumber;
-    private Button next, receiveCode, receiveCodeToEmail;
-    private static final String TITLE = "휴대폰 번호 입력";
-
-    public Help2PhoneFragment() {
-    }
+    public Help2PhoneFragment() {}
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_help_input_email, container, false);
-
-        inputPhoneNumber = (EditText) view.findViewById(R.id.inputPhone);
-        next = (Button) view.findViewById(R.id.next);
-        receiveCode = (Button) view.findViewById(R.id.receiveCode1);
-        receiveCodeToEmail = (Button) view.findViewById(R.id.receiveCodeToEmail);
+        View view = inflater.inflate(R.layout.fragment_help_input_phonenumber, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         HelpActivity activity = (HelpActivity) getActivity();
@@ -66,32 +55,40 @@ public class Help2PhoneFragment extends Fragment {
         TextView textTitle = (TextView) viewToolbar.findViewById(R.id.text_toolbar_title);
         textTitle.setText(TITLE);
 
-        inputPhoneNumber.addTextChangedListener(textWatcherInput);
+        final Button receiveCode1 = (Button) view.findViewById(R.id.receiveCode1);
+        final Button receiveCode2 = (Button) view.findViewById(R.id.receiveCodeToEmail);
+        btn_next = (Button) view.findViewById(R.id.btn_next);
+        inputPhone = (EditText) view.findViewById(R.id.inputPhone);
 
-        next.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (true/*todo: db에서 일치하는 데이터가 있을 때.*/) {
+                if(true){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("index", "2");
+                    bundle.putString("data", inputPhone.getText().toString());
+
                     int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
                     Log.i("count", "policy count : " + count);
                     Fragment f = new Help3ConfirmFragment();
+                    f.setArguments(bundle);
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.help_container, f);
                     ft.addToBackStack("" + count);
                     ft.commit(); //백스택에 해당 프래그먼트가 저장됨
-                } else { //
+                } else{
                     NoMatchPhoneDialogFragment dialog = new NoMatchPhoneDialogFragment();
                     dialog.show(getFragmentManager(), "dialog");
                 }
             }
         });
-        receiveCode.setOnClickListener(new View.OnClickListener() {
+        receiveCode1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendCode();
             }
         });
-        receiveCodeToEmail.setOnClickListener(new View.OnClickListener() {
+        receiveCode2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
@@ -104,6 +101,7 @@ public class Help2PhoneFragment extends Fragment {
             }
         });
 
+        inputPhone.addTextChangedListener(textWatcherInput);
 
         actionBar.setCustomView(viewToolbar, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
 
@@ -113,14 +111,14 @@ public class Help2PhoneFragment extends Fragment {
     TextWatcher textWatcherInput = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (inputPhoneNumber.getText().toString().length() >= 12) {
+            if (inputPhone.getText().toString().length() >= 12) {
                 Toast.makeText(getActivity(), "올바른 핸드폰 번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                next.setVisibility(View.INVISIBLE);
-            } else if (inputPhoneNumber.getText().toString().length() == 11 ||
-                    inputPhoneNumber.getText().toString().length() == 10) {
-                next.setVisibility(View.VISIBLE);
+                btn_next.setVisibility(View.INVISIBLE);
+            } else if (inputPhone.getText().toString().length() == 11 ||
+                    inputPhone.getText().toString().length() == 10) {
+                btn_next.setVisibility(View.VISIBLE);
             } else {
-                next.setVisibility(View.INVISIBLE);
+                btn_next.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -133,15 +131,5 @@ public class Help2PhoneFragment extends Fragment {
         }
     };
 
-    private void goActivity(Class c) {
-        Intent i = new Intent(getActivity(), c);
-        i.putExtra("index", 2);
-        i.putExtra("data", inputPhoneNumber.getText().toString());
-        startActivity(i);
-    }
-
-    private void sendCode() {
-        //Todo: 코드 전송부분 구현.
-    }
-
+    private void sendCode(){}
 }

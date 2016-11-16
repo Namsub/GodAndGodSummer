@@ -1,10 +1,13 @@
 package com.juntcompany.godandgodsummer.Chatting;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.juntcompany.godandgodsummer.R;
 
 import com.github.nkzawa.socketio.client.IO;
@@ -23,8 +28,8 @@ import com.juntcompany.godandgodsummer.Util.GodAndGod;
 import java.net.URISyntaxException;
 
 public class ChattingActivity extends AppCompatActivity {
-
-
+    public String current_room_number = "";
+    public String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,11 @@ public class ChattingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{
+                for(Fragment fragment: getSupportFragmentManager().getFragments()){
+                    if(fragment.isVisible()){
+                        ((FirebaseChattingFragment)fragment).removeFirebaseEventListener(current_room_number);
+                    }
+                }//현재 보여지고 있는 가장 최상위 fragment 가져오기
                 finish();
             }
         }

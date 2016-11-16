@@ -30,6 +30,8 @@
         <activity
             android:name=".Login.SignIn.SignInActivity"
             android:windowSoftInputMode="adjustPan" />
+        <!-- 추가된 부분입니다. -->
+        <activity android:name=".Login.Help.HelpActivity"></activity>
         <activity
             android:name=".WriteBoard.WriteBoardActivity"
             android:windowSoftInputMode="adjustResize" />

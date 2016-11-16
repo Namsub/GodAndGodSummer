@@ -28,6 +28,6 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment"
     android:layout_below="@+id/toolbar"
-    />
+        tools:layout="@layout/fragment_firebase_chatting" />
 
 </RelativeLayout>

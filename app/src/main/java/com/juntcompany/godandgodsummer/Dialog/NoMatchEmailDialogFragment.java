@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-//import com.juntcompany.godandgodsummer.Login.Help.HelpFindPhoneActivity;
 import com.juntcompany.godandgodsummer.R;
 
 
@@ -25,19 +24,16 @@ public class NoMatchEmailDialogFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_no_match_email_dialog, container, false);
 
-//        final Button btn_research = (Button)view.findViewById(R.id.button_reserch);
+        final Button btn_research = (Button)view.findViewById(R.id.button_reserch);
 
         setCancelable(true);
 
-//        btn_research.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(view.getContext(), HelpFindPhoneActivity.class);
-//                startActivity(i);
-//                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                dismiss();
-//            }
-//        });
+        btn_research.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         return view;
     }

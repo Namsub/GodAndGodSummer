@@ -28,17 +28,13 @@ import com.juntcompany.godandgodsummer.R;
  */
 
 public class Help3ConfirmFragment extends Fragment {
-    public static String data;
     public static final String CODE = "1234";
-    public static final String USER_MESSAGE = "user_message";
     private static final String TITLE = "계정 인증";
 
     private TextView sendMSG, userInputData;
     private Button sendCode;
-    private int index;
+    private String data, index;
 
-    Bundle bundle;
-    User user;
 
     public Help3ConfirmFragment() {
     }
@@ -47,12 +43,15 @@ public class Help3ConfirmFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bundle = getArguments();
-        user = (User) bundle.getSerializable(Help3ConfirmFragment.USER_MESSAGE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        data = getArguments().getString("data");
+        index = getArguments().getString("index");
+
+        Log.d("abc", data + ", " + index);
+
         View view = inflater.inflate(R.layout.fragment_help_confirm_account, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -66,7 +65,7 @@ public class Help3ConfirmFragment extends Fragment {
         actionBar.setHomeAsUpIndicator(R.drawable.button_back);
 
         View viewToolbar = getActivity().getLayoutInflater().inflate(R.layout.toolbar_only_title, null);
-        TextView textTitle = (TextView)viewToolbar.findViewById(R.id.text_toolbar_title);
+        TextView textTitle = (TextView) viewToolbar.findViewById(R.id.text_toolbar_title);
         textTitle.setText(TITLE);
 
         final Button revestCode = (Button) view.findViewById(R.id.receiveCode1);
@@ -77,12 +76,11 @@ public class Help3ConfirmFragment extends Fragment {
         sendCode = (Button) view.findViewById(R.id.receiveCode2);
 
 
-        if(user.name.equals("1")){
+        if (index.equals("1")) {
             email();
-        } else if(user.name.equals("2")){
+        } else if (index.equals("2")) {
             phone();
-        } else{
-            Log.d("user.name value is ", user.name);
+        } else {
         }
 
         revestCode.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +95,7 @@ public class Help3ConfirmFragment extends Fragment {
             public void onClick(View view) {
                 if (inputCode.getText().toString().length() == 0) {
                     Toast.makeText(getActivity(), "코드를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else if (CODE.equals(inputCode.getText().toString())) {
-                    Intent i = new Intent(view.getContext(), NoMatchCodeDialog.class);
-                    i.putExtra("index", index);
+                } else if (!CODE.equals(inputCode.getText().toString())) {
                     NoMatchCodeDialog dialog = new NoMatchCodeDialog();
                     dialog.show(getFragmentManager(), "dialog");
                 } else {
@@ -109,7 +105,7 @@ public class Help3ConfirmFragment extends Fragment {
                     Fragment f = new Help4CreatePWFragment();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.help_container, f);
-                    ft.addToBackStack(""+count);
+                    ft.addToBackStack("" + count);
                     ft.commit(); //백스택에 해당 프래그먼트가 저장됨
                     //        프래그먼트 세팅
                 }
@@ -119,7 +115,7 @@ public class Help3ConfirmFragment extends Fragment {
     }
 
     private void email() {
-        userInputData.setText(user.email);
+        userInputData.setText(data);
         sendMSG.setText("다음 이메일 주소로 메시지가 전송되었습니다");
 
         sendCodeToUser();
@@ -133,14 +129,14 @@ public class Help3ConfirmFragment extends Fragment {
                 Fragment f = new Help2PhoneFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.help_container, f);
-                ft.addToBackStack(""+count);
+                ft.addToBackStack("" + count);
                 ft.commit();
             }
         });
     }
 
     private void phone() {
-        String s = user.phoneNumber;
+        String s = data;
         char[] arr_phoneNumbers = new char[s.length()];
         arr_phoneNumbers = s.toCharArray();
 
@@ -166,11 +162,12 @@ public class Help3ConfirmFragment extends Fragment {
                 Fragment f = new Help2EmailFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.help_container, f);
-                ft.addToBackStack(""+count);
+                ft.addToBackStack("" + count);
                 ft.commit();
             }
         });
     }
+
     private void sendCodeToUser() {
         //Todo : 사용자에게 인증 코드 보내주는 부분.
     }

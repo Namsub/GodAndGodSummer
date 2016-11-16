@@ -12,8 +12,6 @@ import android.widget.Button;
 
 import com.juntcompany.godandgodsummer.R;
 
-//import static com.juntcompany.godandgodsummer.Login.Help.HelpConfirmAccountActivity.data;
-
 /**
  * Created by 이서현 on 2016-09-29.
  */
@@ -45,10 +43,6 @@ public class NoMatchCodeDialog extends DialogFragment {
         btn_retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), getActivity().getClass());
-                //i.putExtra("data", data);
-                i.putExtra("index", index);
-                startActivity(i);
                 dismiss();
             }
         });

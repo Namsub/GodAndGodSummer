@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.Dialog.NoMatchEmailDialogFragment;
 import com.juntcompany.godandgodsummer.R;
 
@@ -26,11 +25,9 @@ import com.juntcompany.godandgodsummer.R;
 
 public class Help2EmailFragment extends Fragment {
 
-    public static final String USER_MESSAGE = "user_message";
     private static final String TITLE = "이메일 주소 입력";
     private EditText useEmail;
     private Button button;
-    Bundle dataBundle;
 
     public Help2EmailFragment() {
     }
@@ -38,7 +35,6 @@ public class Help2EmailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataBundle = new Bundle();
     }
 
     @Override
@@ -59,49 +55,24 @@ public class Help2EmailFragment extends Fragment {
         TextView textTitle = (TextView) viewToolbar.findViewById(R.id.text_title);
         textTitle.setText(TITLE);
 
-        final Button btnNext = (Button) viewToolbar.findViewById(R.id.button_next);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //        프래그먼트 세팅
-                int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
-                Log.i("count", "policy count : " + count);
-                Fragment f = new Help3ConfirmFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.help_container, f);
-                ft.addToBackStack("" + count);
-                ft.commit(); // 백스택에 해당 프래그먼트가 저장됨
-                //        프래그먼트 세팅
-
-            }
-        });
         button = (Button) viewToolbar.findViewById(R.id.button_next);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (true/*Todo:db와 인풋된 이메일 주소 비교.*/) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("index", "1");
+                    bundle.putString("data", useEmail.getText().toString());
+                    //        프래그먼트 세팅
                     int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
                     Log.i("count", "policy count : " + count);
                     Fragment f = new Help3ConfirmFragment();
+                    f.setArguments(bundle);
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.help_container, f);
                     ft.addToBackStack("" + count);
-                    ft.commit();
-
-                    dataBundle.putString("index", "1");
-                    dataBundle.putString("email", useEmail.getText().toString());
-
-
-                    User user = (User)getArguments().getSerializable(Help2EmailFragment.USER_MESSAGE);
-                    user.email = useEmail.getText().toString();
-                    user.name = "1";
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(Help3ConfirmFragment.USER_MESSAGE, user);
-
-//                    Intent i = new Intent(getContext(), Help3ConfirmFragment.class);
-//                    i.putExtra("index", 1);
-//                    i.putExtra("data", useEmail.getText().toString());
-//                    startActivity(i);
+                    ft.commit(); // 백스택에 해당 프래그먼트가 저장됨
+                    //        프래그먼트 세팅
                 } else {
                     NoMatchEmailDialogFragment dialog = new NoMatchEmailDialogFragment();
                     dialog.show(getFragmentManager(), "dialog");
@@ -121,7 +92,6 @@ public class Help2EmailFragment extends Fragment {
     TextWatcher textWatcherInput = new TextWatcher() {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            Log.i("onTextChanged", s.toString());
             if (useEmail.getText().toString().contains("@") && useEmail.getText().toString().contains(".")) {
                 button.setVisibility(View.VISIBLE);
             } else {
