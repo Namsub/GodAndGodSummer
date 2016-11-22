@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.juntcompany.godandgodsummer.Main.Activity.ActivityLogFragment;
 import com.juntcompany.godandgodsummer.Main.Chatting.ChattingManageFragment;
 import com.juntcompany.godandgodsummer.Main.Toolbar.Search.SearchFragment;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     });
-
 //    백프레스 종료 용
+
 
     TabLayout tabLayout;
     Fragment f; //탭에 나오는 프래그먼트 용
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //String token = FirebaseInstanceId.getInstance().getToken();
+        //Log.d("MainActivity", "Refreshed token: " + token);
 // 메인화면 띄워질 때 제일 먼저 마지막 접속시간 비교해서 지난주 타겟값 업데이트하기
         //마지막 접속시간 불러오기
         PropertyManager propertymanager = PropertyManager.getInstance();
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             previous_week = Integer.parseInt(split_time[1]);
         }
 
+ //       getInstanceIdToken();
         //현재시간 불러오기
         Calendar current_cal = Calendar.getInstance();
         int current_year = current_cal.get(Calendar.YEAR);
@@ -143,7 +147,18 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.tab_notice));
 
 //
-        f = new TimelineFragment();
+        switch(PropertyManager.getInstance().getInitialFragmentOfMainActivity()){
+            case 0:{
+                f = new TimelineFragment();
+                break;
+            }
+            case 1:{
+                f= new ChattingManageFragment();
+                tabLayout.getTabAt(1).select();
+                PropertyManager.getInstance().setInitialFragmentOfMainActivity(0);
+                break;
+            }
+        }
 //        초기 화면용 프래그먼트  timeline 이 나와야함
         getSupportFragmentManager()
                 .beginTransaction()

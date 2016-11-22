@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.Manager.PropertyManager;
 import com.juntcompany.godandgodsummer.R;
@@ -57,9 +58,12 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void callSignUpLast(User user){ //마지막 signin11comfirm 프래그먼트까지 다 돌고 마칠때 호출하는 메소드
+        String token = FirebaseInstanceId.getInstance().getToken();
+        PropertyManager.getInstance().setRegID(token);
+        Log.d("SignInActivity", "Refreshed token: " + token);
         Log.i("user", this.user.phoneNumber + this.user.email + " ::::" + user.email + user.password + user.gender);
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<User> call =apiInterface.createUser(user.email, user.name, user.password, user.religion, user.phoneNumber, user.gender, user.birthDay);
+        Call<User> call =apiInterface.createUser(user.email, user.name, user.password, user.religion, user.phoneNumber, user.gender, user.birthDay, token);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

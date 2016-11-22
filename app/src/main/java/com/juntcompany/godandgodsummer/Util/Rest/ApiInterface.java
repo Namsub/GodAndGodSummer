@@ -1,5 +1,6 @@
 package com.juntcompany.godandgodsummer.Util.Rest;
 
+import com.juntcompany.godandgodsummer.Data.Chat;
 import com.juntcompany.godandgodsummer.Data.Timeline;
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.DataStructure.ActivityResult;
@@ -33,14 +34,22 @@ public interface ApiInterface {
 
     @FormUrlEncoded //O
     @POST("/auth/signup") //회원가입 api // email, name, password,religion, phone,gender,birth
-    Call<User> createUser(@Field("email") String email, @Field("name") String name, @Field("password") String password, @Field("religion") String religion, @Field("phone") String phone, @Field("gender") String gender, @Field("birth") String birth);
+    Call<User> createUser(@Field("email") String email, @Field("name") String name, @Field("password") String password, @Field("religion") String religion, @Field("phone") String phone, @Field("gender") String gender, @Field("birth") String birth, @Field("token") String token);
 
     @FormUrlEncoded //O
-    @POST("/auth/login") //회원가입 api
+    @POST("/auth/login") //로그인 api
     Call<User> userLogin(@Field("email") String email, @Field("password") String password);
 
     @GET("/auth/logout") //O
     Call<User> userLogout();
+
+    @FormUrlEncoded //O
+    @POST("/auth/regid") //토큰등록 api
+    Call<User> regId(@Field("email") String email, @Field("token") String token);
+
+    @FormUrlEncoded //O
+    @POST("/chat/invite") //O
+    Call<Chat> inviteFriend(@Field("room_number") String room_number, @Field("id") String id);
 
     @GET("/user/myinfo/{email}")
     Call<UserInfoResponse> userInfo(@Path("email") String email);

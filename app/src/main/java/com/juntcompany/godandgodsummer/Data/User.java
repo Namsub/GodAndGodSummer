@@ -29,6 +29,8 @@ public class User implements Serializable{
     public String religion;
     @SerializedName("user_gender")
     public String gender;
+    @SerializedName("user_token")
+    public String token;
     @SerializedName("user_photo")
     public String userPhoto;
 
@@ -36,9 +38,6 @@ public class User implements Serializable{
     public int friendNum;
     public String religionArea;
     public String city;
-
-    public Target previous_target;
-    public Target current_target;
 
     public UserResult result;
 

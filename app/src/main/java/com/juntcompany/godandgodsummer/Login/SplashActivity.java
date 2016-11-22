@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.juntcompany.godandgodsummer.Data.User;
 import com.juntcompany.godandgodsummer.Main.MainActivity;
 import com.juntcompany.godandgodsummer.Manager.PropertyManager;
@@ -31,21 +32,46 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(PropertyManager.getInstance().getUserEmail()!=null&& !PropertyManager.getInstance().getUserEmail().equals("")) { // 로컬에 아이디가 있으면
-                    ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                    final ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
                     String userEmail = PropertyManager.getInstance().getUserEmail();
                     String password= PropertyManager.getInstance().getUserPassword();
-                    Log.i("splash", userEmail + password);
+
+                    Log.i("splash", userEmail + '/' + password +'/');
                     Call<User> call = apiInterface.userLogin(userEmail,password);
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
-                            Log.i("splash1", "test");
+                            String token = FirebaseInstanceId.getInstance().getToken();
+                            Log.i("splash1", "test" + token);
+                            String regId = PropertyManager.getInstance().getRegID();
+                            String email = PropertyManager.getInstance().getUserEmail();
                             if(response.isSuccessful()){
                                 if (response.body().result.status.equals("success")) {
                                     //로그인 성공 화면 이동
+                                    //Log.i("splash-token", token);
+                                    if(!token.equals(regId)){
+                                        Log.i("splash-regid", "111" + regId);
+                                        Call<User> call_reg = apiInterface.regId(email,token);
+                                        call_reg.enqueue(new Callback<User>() {
+                                            @Override
+                                            public void onResponse(Call<User> call, Response<User> response) {
+                                            }
+                                            @Override
+                                            public void onFailure(Call<User> call, Throwable t) {
+                                            }
+                                        });
+                                    }
+
+                                    PropertyManager.getInstance().setInitialFragmentOfMainActivity(0);
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // 메인을 들어가면 메인 전에 실행했던 TASK 를 모두 삭제
                                     startActivity(intent);
+                                } else{
+                                    Toast.makeText(getApplicationContext(), "비밀 번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplication(), LoginActivity.class);
+                                    //Intent intent = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }else {
                                 Toast.makeText(getApplicationContext(), "네트워크 상태를 확인해 주세요", Toast.LENGTH_SHORT).show();

@@ -189,6 +189,20 @@ public class PropertyManager {
         return mPrefs.getString(FIELD_ROOM_LIST, "");
     }
 
+    private static final String REG_ID = "registration_id";
+    public void setRegID(String regid){
+        mEditor.putString(REG_ID, regid);
+        mEditor.commit();
+    }
+    public String getRegID(){ return mPrefs.getString(REG_ID, ""); }
+
+    private static final String INITIAL_FRAGMENT = "InitialFragmentOfMainActivity";
+    public void setInitialFragmentOfMainActivity(int choice){
+        mEditor.putInt(INITIAL_FRAGMENT, choice);
+        mEditor.commit();
+    }
+    public int getInitialFragmentOfMainActivity(){ return mPrefs.getInt(INITIAL_FRAGMENT, 0); }
+
     public void setRoomNOP(String key, int nop){
         mEditor.putInt(key, nop);
         mEditor.commit();

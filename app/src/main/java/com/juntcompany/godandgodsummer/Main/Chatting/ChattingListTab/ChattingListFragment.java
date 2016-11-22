@@ -25,9 +25,7 @@ import com.juntcompany.godandgodsummer.Data.NumberOfPeople;
 import com.juntcompany.godandgodsummer.Manager.PropertyManager;
 import com.juntcompany.godandgodsummer.R;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+
 
 
 /**
@@ -43,10 +41,11 @@ public class ChattingListFragment extends Fragment {
     int count = 0;
     String email = PropertyManager.getInstance().getUserEmail().split("[.]")[0];
 
+    /////
+
     public ChattingListFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,24 +57,28 @@ public class ChattingListFragment extends Fragment {
             @Override
             public void onAdapterItemViewClick(View view, int position) {
                 Chat chat = mAdapter.getItem(position);
-                startActivity(chat.intent);
+                Intent intent = new Intent(getContext(), ChattingActivity.class);
+                intent.putExtra("room_name", chat.room_name);
+                intent.putExtra("email", email);
+                startActivity(intent);
             }
             // 내가 추가한 부분 ///
             public void onAdapterItemViewLongClick(View view, final int position){
                 Chat temp_item = mAdapter.getItem(position);
                 temp_item.intent = null;
-                databaseReference.child(email+temp_item.room_number).removeValue();
-                databaseReference.child(temp_item.room_number).child(email).removeValue();
-                mAdapter.getItem(position).number_of_persons = PropertyManager.getInstance().getRoomNOP(mAdapter.getItem(position).room_number);
+                databaseReference.child(email+temp_item.room_name).removeValue();
+                databaseReference.child(temp_item.room_name).child(email).removeValue();
+                mAdapter.getItem(position).number_of_persons = PropertyManager.getInstance().getRoomNOP(mAdapter.getItem(position).room_name);
+
                 if(mAdapter.getItem(position).number_of_persons == 1) {
-                    databaseReference.child(temp_item.room_number).removeValue();
-                    databaseReference.child(temp_item.room_number+"number").removeValue();
+                    databaseReference.child(temp_item.room_name).removeValue();
+                    databaseReference.child(temp_item.room_name+"number").removeValue();
                 }
 
                 String[] temp_list = room_list.split("[|]");
                 room_list = "";
                 for(int i=0; i<temp_list.length; i++){
-                    if(!temp_list[i].equals(temp_item.room_number + "/" + temp_item.lastSpeak + "/" + temp_item.lastTime))
+                    if(!temp_list[i].equals(temp_item.room_name + "/" + temp_item.lastSpeak + "/" + temp_item.lastTime))
                         room_list += temp_list[i] + "|";
                 }
                 if(room_list.length() != 0)
@@ -102,23 +105,24 @@ public class ChattingListFragment extends Fragment {
                 chat.lastSpeak = "사람이 말한 마지막 말";
                 chat.lastTime = "시간";
                 chat.number_of_persons = 1;
-                chat.room_number = "room" + count;
+                chat.room_name = email + "room" + count;
                 if(room_list.length() == 0)
-                    room_list += chat.room_number + "/" + chat.lastSpeak + "/" + chat.lastTime;
+                    room_list += chat.room_name + "/" + chat.lastSpeak + "/" + chat.lastTime;
                 else
-                    room_list += "|" + chat.room_number + "/" + chat.lastSpeak + "/" + chat.lastTime;
+                    room_list += "|" + chat.room_name + "/" + chat.lastSpeak + "/" + chat.lastTime;
 
                 Log.i("chat", "room : " + room_list  );
                 PropertyManager.getInstance().setRoomList(room_list);
 
-                databaseReference.child(chat.room_number).child(email).setValue(email);
+                databaseReference.child(chat.room_name).child(email).setValue(email);
 
                 chat.intent = new Intent(getContext(), ChattingActivity.class);
-                chat.intent.putExtra("room_number", chat.room_number);
+                chat.intent.putExtra("room_name", chat.room_name);
                 chat.intent.putExtra("email", email);
                 mAdapter.add(chat);
                 count++;
 
+                //chat.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                 startActivity(chat.intent);
             }
         });
@@ -139,7 +143,8 @@ public class ChattingListFragment extends Fragment {
             for(int i=0; i<rooms.length; i++){
                 String[] room_info = rooms[i].split("/");
                 Chat chat = new Chat();
-                chat.room_number = room_info[0];
+                chat.room_name = room_info[0];
+                //chat.number_of_persons = Integer.parseInt(room_info[1]);
                 chat.lastSpeak = room_info[1];
                 chat.lastTime = room_info[2];
                 mAdapter.add(chat);
